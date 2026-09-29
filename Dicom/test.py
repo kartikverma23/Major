@@ -1,35 +1,42 @@
+"""Convert the sample DICOM test images to JPEG.
+
+Run from any working directory with: python Dicom/test.py
+"""
+from pathlib import Path
+
 import numpy as np
 import pydicom
 from PIL import Image
-import os
+
+ROOT = Path(__file__).resolve().parent
+INPUT_DIR = ROOT / "Test_Images"
+OUTPUT_DIR = ROOT / "converted"
 
 
+def convert_dcm_jpg(path: Path) -> Image.Image:
+    """Read a DICOM file and scale its pixel array to an 8-bit JPEG image."""
+    dataset = pydicom.dcmread(str(path))
+    pixels = dataset.pixel_array.astype(float)
+    peak = pixels.max()
+    if peak <= 0:
+        raise ValueError(f"DICOM image has no positive pixel values: {path.name}")
+    scaled = (np.maximum(pixels, 0) / peak) * 255
+    return Image.fromarray(np.uint8(scaled))
 
-def get_names(path):
-    names = []
-    for root, dirnames, filenames in os.walk(path):
-        for filename in filenames:
-            _, ext = os.path.splitext(filename)
-            if ext in ['.dcm']:
-                names.append(filename)
 
-    return names
+def main() -> int:
+    files = sorted(INPUT_DIR.glob("*.dcm"))
+    if not files:
+        raise FileNotFoundError(f"No .dcm files found in {INPUT_DIR}")
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    converted = 0
+    for path in files:
+        image = convert_dcm_jpg(path)
+        image.save(OUTPUT_DIR / f"{path.stem}.jpg")
+        converted += 1
+    print(f"Converted {converted} DICOM files to {OUTPUT_DIR}")
+    return 0
 
-print(get_names('Test_Images'))
 
-def convert_dcm_jpg(name):
-
-    im = pydicom.dcmread('Test_Images/' + name)
-
-    im = im.pixel_array.astype(float)
-
-    rescaled_image = (np.maximum(im,0)/im.max())*255
-    final_image = np.uint8(rescaled_image)
-
-    final_image = Image.fromarray(final_image)
-    return final_image
-
-names = get_names('Test_Images')
-for name in names:
-    image = convert_dcm_jpg(name)
-    image.save(name + '.jpg')
+if __name__ == "__main__":
+    raise SystemExit(main())
