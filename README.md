@@ -22,10 +22,11 @@ The original notebooks and data are retained. The repository currently includes 
 
 ```text
 .
-├── 1.ipynb                         # CNN and transfer-learning experiments
+├── 1.ipynb                         # Historical CNN and transfer-learning experiments
 ├── 2.ipynb                         # Additional transfer-learning experiments
 ├── 3.ipynb                         # Custom CNN experiment
-├── test.ipynb                      # Consolidated experiment notebook
+├── test.ipynb                      # Historical consolidated experiment notebook
+├── notebooks/reproducible_cnn.ipynb # Clean output-stripped notebook
 ├── Dicom/Test_Images/              # DICOM test images
 ├── Dicom/test.py                   # DICOM-to-JPEG conversion utility
 ├── chest-xray-pneumonia/           # Dataset used by the notebooks
@@ -43,10 +44,10 @@ source .venv/bin/activate       # Windows: .venv\\Scripts\\activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 python scripts/validate_dataset.py
-jupyter notebook 3.ipynb
+jupyter notebook notebooks/reproducible_cnn.ipynb
 ```
 
-Start with `3.ipynb` for the custom CNN workflow. The other notebooks contain additional model experiments and may download pretrained weights on first use. Training is resource-intensive and may require a GPU or substantial CPU time.
+Start with `notebooks/reproducible_cnn.ipynb` for the clean CNN workflow. The historical notebooks are retained for reference. The other notebooks contain additional model experiments and may download pretrained weights on first use. Training is resource-intensive and may require a GPU or substantial CPU time.
 
 ### DICOM conversion
 
