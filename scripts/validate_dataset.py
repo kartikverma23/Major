@@ -35,7 +35,15 @@ def main() -> int:
         counts = {}
         for label in EXPECTED_CLASSES:
             folder = root / split / label
-            files = [p for p in folder.iterdir() if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS]
+            if not folder.is_dir():
+                raise FileNotFoundError(f"Missing class directory: {folder}")
+            files = [
+                p for p in folder.iterdir()
+                if p.is_file()
+                and not p.name.startswith("._")
+                and p.name != ".DS_Store"
+                and p.suffix.lower() in IMAGE_EXTENSIONS
+            ]
             counts[label] = len(files)
             total += len(files)
         print(f"{split}: {counts}")
