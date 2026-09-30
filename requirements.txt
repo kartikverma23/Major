@@ -1,6 +1,6 @@
 # Python 3.10 or 3.11 recommended.
 # TensorFlow is used by 1.ipynb, 2.ipynb, 3.ipynb, and test.ipynb.
-tensorflow>=2.13,<2.16
+tensorflow>=2.16,<3
 numpy<2
 pandas>=1.5
 matplotlib>=3.7
