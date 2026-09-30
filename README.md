@@ -1,6 +1,6 @@
 # Pneumonia Detection from Chest X-ray Images
 
-A machine-learning project for classifying chest X-ray images into **NORMAL** and **PNEUMONIA** classes. The repository contains the original project notebooks and a reproducibility layer added to make the work easier to inspect and run.
+A machine-learning project for classifying chest X-ray images into **NORMAL** and **PNEUMONIA** classes. The repository contains the original project notebooks, repaired historical workflows, and a clean reproducibility layer for local and Google Colab runs.
 
 > **Important:** This is an educational computer-vision project, not a clinical diagnostic tool. It must not be used for medical decisions.
 
@@ -15,6 +15,8 @@ This repository preserves work associated with the 2022–23 project and the pap
 - Added `requirements.txt` for a reproducible Python environment.
 - Added `scripts/validate_dataset.py` as a lightweight preflight check.
 - Added this README with setup, limitations, and a clear run order.
+- Added `notebooks/colab_pneumonia_detection.ipynb`, a clean Colab workflow with class weights, modern TensorFlow APIs, test metrics, model export, and an optional Gradio demo.
+- Repaired accidental notebook indentation errors, stale Kaggle paths, deprecated Keras imports, and deprecated Seaborn plotting calls in the retained notebooks.
 
 The original notebooks and data are retained. The repository currently includes a large dataset; a future cleanup could move the dataset to an external download step to make cloning faster.
 
@@ -33,6 +35,12 @@ The original notebooks and data are retained. The repository currently includes 
 ├── scripts/validate_dataset.py     # Dataset layout preflight
 └── requirements.txt
 ```
+
+## Run on Google Colab
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/kartikverma23/Major/blob/main/notebooks/colab_pneumonia_detection.ipynb)
+
+Open the badge above and run `notebooks/colab_pneumonia_detection.ipynb`. The notebook detects the repository dataset, trains a compact CNN, evaluates precision/recall/F1 and ROC-AUC, saves `artifacts/pneumonia_cnn.keras`, and can optionally launch a Gradio demo. Select a GPU runtime before training. The repository includes the image dataset, so the first Colab setup cell may take several minutes to clone.
 
 ## Run locally
 
