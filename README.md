@@ -10,13 +10,13 @@ This repository preserves work associated with the 2022–23 project and the pap
 
 ## What was repaired
 
-- Replaced Kaggle-only `../input/...` paths in `1.ipynb` and `2.ipynb` with the repository's local dataset path.
-- Corrected the dataset path in `test.ipynb`.
+- Repaired syntax, imports, and dataset path handling in the maintained reproducible notebooks.
+- The original historical experiment notebooks are retained for reference; use the clean Colab notebook for the supported run path.
 - Added `requirements.txt` for a reproducible Python environment.
 - Added `scripts/validate_dataset.py` as a lightweight preflight check.
 - Added this README with setup, limitations, and a clear run order.
 - Added `notebooks/colab_pneumonia_detection.ipynb`, a clean Colab workflow with class weights, modern TensorFlow APIs, test metrics, model export, and an optional Gradio demo.
-- Repaired accidental notebook indentation errors, stale Kaggle paths, deprecated Keras imports, and deprecated Seaborn plotting calls in the retained notebooks.
+- Repaired accidental notebook indentation errors, stale paths, deprecated Keras imports, and deprecated Seaborn plotting calls in the maintained notebooks.
 
 The original notebooks and data are retained. The repository currently includes a large dataset; a future cleanup could move the dataset to an external download step to make cloning faster.
 
